@@ -1,2 +1,2 @@
 This repository contains a custom docker image that suits the needs of MLDD. It is based on my personal needs so feel free to adjust if you need to.
-The docker image is based on the Jupyter Docker Stack.
+The docker image is based on the Jupyter Docker Stack Data Science Notebook.

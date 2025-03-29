@@ -1,11 +1,11 @@
 group "default" {
-    targets = ["custom-notebook"]
+    targets = ["datascience-mldd"]
 }
 
 target "foundation" {
     context = "https://github.com/jupyter/docker-stacks.git#main:images/docker-stacks-foundation"
     args = {
-        PYTHON_VERSION = "3.12"
+        PYTHON_VERSION = "3.10"
     }
     tags = ["docker-stacks-foundation"]
 }
@@ -32,13 +32,35 @@ target "minimal-notebook" {
     tags = ["minimal-notebook"]
 }
 
-target "custom-notebook" {
-    context = "."
+target "scipy-notebook" {
+    context = "https://github.com/jupyter/docker-stacks.git#main:images/scipy-notebook"
     contexts = {
         minimal-notebook = "target:minimal-notebook"
     }
     args = {
         BASE_IMAGE = "minimal-notebook"
     }
-    tags = ["custom-jupyter"]
+    tags = ["scipy-notebook"]
+}
+
+target "datascience-notebook" {
+    context = "https://github.com/jupyter/docker-stacks.git#main:images/datascience-notebook"
+    contexts = {
+        scipy-notebook = "target:scipy-notebook"
+    }
+    args = {
+        BASE_IMAGE = "scipy-notebook"
+    }
+    tags = ["datascience-notebook"]
+}
+
+target "datascience-mldd" {
+    context = "."
+    contexts = {
+        datascience-notebook = "target:datascience-notebook"
+    }
+    args = {
+        BASE_IMAGE = "datascience-notebook"
+    }
+    tags = ["datascience-mldd"]
 }
