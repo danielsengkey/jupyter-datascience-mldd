@@ -9,3 +9,10 @@ The docker image is based on the [Jupyter Docker Stack Data Science Notebook](ht
     2. rcdk: interface to the CDK Java framework for cheminformatics.
 
 Regardless these packets are successfully added and the docker image is successfully built please note that the packets might not be tested in a production environment yet.
+
+# Building Docker Image
+At the moment, the image has to be built by yourself. The GitHub action is being considered. To build the image, use the following command **after** getting into the repo directory
+```
+docker buildx bake
+```
+Please note that you must have docker installed. The build process may take several moments, depending on your Internet speed.
