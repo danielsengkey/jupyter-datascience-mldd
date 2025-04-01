@@ -7,6 +7,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
 
+# Install htop and btop for resource monitoring
+RUN apt-get update --yes && \
+    apt-get install --yes --no-install-recommends \
+    htop \
+    btop && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 USER ${NB_UID}
 
 # Install additional Python 3 packages
@@ -14,6 +21,7 @@ RUN mamba install --yes \
     'chembl_webresource_client' \
     'numpy' \
     'padelpy' \
+    'papermill' \
     'rdkit' \
     'r-dplyr' \
     'r-forcats' \
