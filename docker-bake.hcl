@@ -43,24 +43,24 @@ target "scipy-notebook" {
     tags = ["scipy-notebook"]
 }
 
-target "datascience-notebook" {
-    context = "https://github.com/jupyter/docker-stacks.git#main:images/datascience-notebook"
+#target "datascience-notebook" {
+#    context = "https://github.com/jupyter/docker-stacks.git#main:images/datascience-notebook"
+#    contexts = {
+#        scipy-notebook = "target:scipy-notebook"
+#    }
+#    args = {
+#        BASE_IMAGE = "scipy-notebook"
+#    }
+#    tags = ["datascience-notebook"]
+#}
+
+target "datascience-mldd" {
+    context = "."
     contexts = {
         scipy-notebook = "target:scipy-notebook"
     }
     args = {
         BASE_IMAGE = "scipy-notebook"
-    }
-    tags = ["datascience-notebook"]
-}
-
-target "datascience-mldd" {
-    context = "."
-    contexts = {
-        datascience-notebook = "target:datascience-notebook"
-    }
-    args = {
-        BASE_IMAGE = "datascience-notebook"
     }
     tags = ["datascience-mldd"]
 }

@@ -17,12 +17,13 @@ RUN apt-get update --yes && \
 USER ${NB_UID}
 
 # Install additional Python 3 packages
-RUN mamba install --yes \
+RUN mamba install -c conda-forge --yes -vv \
     'chembl_webresource_client' \
     'numpy' \
     'padelpy' \
     'papermill' \
     'rdkit' \
+    'lightgbm' \
     'r-dplyr' \
     'r-forcats' \
     'r-ggplot2' \
