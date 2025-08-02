@@ -4,9 +4,6 @@ group "default" {
 
 target "foundation" {
     context = "https://github.com/jupyter/docker-stacks.git#main:images/docker-stacks-foundation"
-    args = {
-        PYTHON_VERSION = "3.10"
-    }
     tags = ["docker-stacks-foundation"]
 }
 
@@ -42,17 +39,6 @@ target "scipy-notebook" {
     }
     tags = ["scipy-notebook"]
 }
-
-#target "datascience-notebook" {
-#    context = "https://github.com/jupyter/docker-stacks.git#main:images/datascience-notebook"
-#    contexts = {
-#        scipy-notebook = "target:scipy-notebook"
-#    }
-#    args = {
-#        BASE_IMAGE = "scipy-notebook"
-#    }
-#    tags = ["datascience-notebook"]
-#}
 
 target "datascience-mldd" {
     context = "."
