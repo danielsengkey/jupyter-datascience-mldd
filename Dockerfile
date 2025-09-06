@@ -16,7 +16,7 @@ RUN apt-get update --yes && \
 
 USER ${NB_UID}
 
-# Install additional Python 3 packages
+# Install additional Python 3 and R packages
 RUN mamba install -c conda-forge --yes -vv \
     'chembl_webresource_client' \
     'numpy' \
@@ -32,7 +32,11 @@ RUN mamba install -c conda-forge --yes -vv \
     'r-readr' \
     'r-reshape2' \
     'r-rstatix' \
-    'r-tidyr' && \
+    'r-tidyr' \
+    'r-irkernel' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+# Install R Kernel (irkernel) for Jupyter
+RUN Rscript -e "IRkernel::installspec(user = FALSE)"
