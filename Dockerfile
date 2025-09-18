@@ -22,6 +22,7 @@ RUN mamba install -c conda-forge --yes -vv \
     'numpy' \
     'padelpy' \
     'papermill' \
+    'pytest' \
     'rdkit' \
     'lightgbm' \
     'r-dplyr' \
@@ -39,4 +40,4 @@ RUN mamba install -c conda-forge --yes -vv \
     fix-permissions "/home/${NB_USER}"
 
 # Install R Kernel (irkernel) for Jupyter
-RUN Rscript -e "IRkernel::installspec(user = FALSE)"
+RUN Rscript -e "IRkernel::installspec(user = TRUE)"
