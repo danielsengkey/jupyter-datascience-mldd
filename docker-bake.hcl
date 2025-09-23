@@ -1,5 +1,5 @@
 group "default" {
-    targets = ["datascience-mldd"]
+    targets = ["datascience-mldd-pp1ab-revisited"]
 }
 
 target "foundation" {
@@ -54,7 +54,7 @@ target "scipy-notebook" {
 #    tags = ["datascience-notebook"]
 #}
 
-target "datascience-mldd" {
+target "datascience-mldd-pp1ab-revisited" {
     context = "."
     contexts = {
         scipy-notebook = "target:scipy-notebook"
@@ -62,5 +62,5 @@ target "datascience-mldd" {
     args = {
         BASE_IMAGE = "scipy-notebook"
     }
-    tags = ["datascience-mldd"]
+    tags = ["datascience-mldd-pp1ab-revisited"]
 }

@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=datascience-notebook
+ARG BASE_IMAGE=scipy-notebook
 FROM $BASE_IMAGE
 
 LABEL maintainer="Daniel Febrian Sengkey <danielsengkey@unsrat.ac.id>"
@@ -25,6 +25,7 @@ RUN mamba install -c conda-forge --yes -vv \
     'papermill' \
     'pytest' \
     'rdkit' \
+    'scikit-learn=1.5.1' \
     'lightgbm' \
     'r-dplyr' \
     'r-forcats' \
