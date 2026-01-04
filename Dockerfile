@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=datascience-notebook
+ARG BASE_IMAGE=pytorch-notebook
 FROM $BASE_IMAGE
 
 LABEL maintainer="Daniel Febrian Sengkey <danielsengkey@unsrat.ac.id>"
@@ -16,10 +16,12 @@ RUN apt-get update --yes && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_UID}
+ENV CONDA_OVERRIDE_CUDA="12.8"
 
 # Install additional Python 3 and R packages
 RUN mamba install -c conda-forge --yes -vv \
     'chembl_webresource_client' \
+    'gromacs=*=nompi_cuda*' \
     'numpy' \
     'padelpy' \
     'papermill' \
