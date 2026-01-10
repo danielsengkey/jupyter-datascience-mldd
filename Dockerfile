@@ -7,26 +7,66 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
 
-# Install htop and btop for resource monitoring
-RUN apt-get update --yes && \
+# Install CUDA libraries for GNINA, nvtop, htop and btop for resource monitoring
+RUN wget -qO /tmp/cuda-keyring_1.1-1_all.deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb && \
+    dpkg -i /tmp/cuda-keyring_1.1-1_all.deb && \
+    apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     htop \
     btop \
-    git-lfs && \
+    git-lfs \
+    cuda-cudart-12-6 \
+    libcublas-12-6 \
+    libcusparse-12-6 \
+    libcufft-12-6 \
+    libcusolver-12-6 \
+    libcudnn9-cuda-12 \
+    libcudnn9-dev-cuda-12 \
+    libnvjitlink-12-6 \
+    libnvrtc12 \
+    nvtop \
+    openbabel && \
+    rm /tmp/cuda-keyring_1.1-1_all.deb && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Ensure the dynamic linker can find the new libraries
+## CUDA 12.6 libraries
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/"
+RUN ldconfig
+
+## OpenBabel 3.1.1 libraries
+ENV BABEL_DATADIR=/usr/share/openbabel/3.1.1/
+
+# Get GNINA
+RUN wget https://github.com/gnina/gnina/releases/download/v1.3.2/gnina.1.3.2.cuda12.8 -O /usr/local/bin/gnina \
+    && chmod +x /usr/local/bin/gnina
 
 USER ${NB_UID}
 ENV CONDA_OVERRIDE_CUDA="12.8"
 
 # Install additional Python 3 and R packages
-RUN mamba install -c conda-forge --yes -vv \
+RUN mamba install -c conda-forge -c rapidsai --yes -vv \
+    'biopython' \
+    'bokeh' \
     'chembl_webresource_client' \
+    'cudf-polars' \
+    'cuml' \
+    'dimorphite-dl' \
     'gromacs=*=nompi_cuda*' \
+    'nglview' \
+    'mdanalysis' \
+    'mdtraj' \
     'numpy' \
+    'openmm' \
+    'polars' \
     'padelpy' \
     'papermill' \
+    'pdbfixer' \
+    'py3dmol' \
     'pytest' \
+    'python-Levenshtein' \
     'rdkit' \
+    'selfies' \
     'lightgbm' \
     'r-dplyr' \
     'r-forcats' \

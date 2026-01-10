@@ -62,5 +62,5 @@ target "datascience-mldd" {
     args = {
         BASE_IMAGE = "pytorch-notebook"
     }
-    tags = ["datascience-mldd:cuda12"]
+    tags = ["datascience-mldd:expanded"]
 }

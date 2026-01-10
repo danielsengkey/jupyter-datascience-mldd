@@ -16,3 +16,6 @@ At the moment, the image has to be built by yourself. The GitHub action is being
 docker buildx bake
 ```
 Please note that you must have docker installed. The build process may take several moments, depending on your Internet speed.
+
+# Expanded Version
+Beside the standard ML libraries for DD, the expanded docker also enriched with Deep Learning libraries such as Pytorch and Transformer, along with the related CUDA libraries. Since there are CUDA libraries, GNINA and GROMACS with CUDA support are also added.
