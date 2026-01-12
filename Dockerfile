@@ -24,8 +24,7 @@ RUN wget -qO /tmp/cuda-keyring_1.1-1_all.deb https://developer.download.nvidia.c
     libcudnn9-dev-cuda-12 \
     libnvjitlink-12-6 \
     libnvrtc12 \
-    nvtop \
-    openbabel && \
+    nvtop && \
     rm /tmp/cuda-keyring_1.1-1_all.deb && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -33,9 +32,6 @@ RUN wget -qO /tmp/cuda-keyring_1.1-1_all.deb https://developer.download.nvidia.c
 ## CUDA 12.6 libraries
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/cuda-12.6/lib64:/usr/lib/x86_64-linux-gnu/"
 RUN ldconfig
-
-## OpenBabel 3.1.1 libraries
-ENV BABEL_DATADIR=/usr/share/openbabel/3.1.1/
 
 # Get GNINA
 RUN wget https://github.com/gnina/gnina/releases/download/v1.3.2/gnina.1.3.2.cuda12.8 -O /usr/local/bin/gnina \
@@ -57,6 +53,7 @@ RUN mamba install -c conda-forge -c rapidsai --yes -vv \
     'mdanalysis' \
     'mdtraj' \
     'numpy' \
+    'openbabel' \
     'openmm' \
     'polars' \
     'padelpy' \
@@ -84,3 +81,6 @@ RUN mamba install -c conda-forge -c rapidsai --yes -vv \
 
 # Install R Kernel (irkernel) for Jupyter
 RUN Rscript -e "IRkernel::installspec(user = TRUE)"
+
+## OpenBabel libraries
+ENV BABEL_DATADIR=/opt/conda/pkgs/openbabel-3.1.1-py312hbfe4552_9/share/openbabel/3.1.0/
