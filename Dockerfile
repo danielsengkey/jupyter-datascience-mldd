@@ -41,7 +41,7 @@ RUN wget https://github.com/gnina/gnina/releases/download/v1.3.2/gnina.1.3.2.cud
 
 # Switch to non-root notebook user
 USER ${NB_UID}
-ENV CONDA_OVERRIDE_CUDA="12.8"
+ENV CONDA_OVERRIDE_CUDA="13.0"
 
 # 3. Create isolated 'mldd' environment (Python, CUDA, RAPIDS & Cheminformatics)
 RUN mamba create -n mldd -c rapidsai -c pytorch -c conda-forge -c nvidia -c bioconda --yes \
@@ -55,7 +55,6 @@ RUN mamba create -n mldd -c rapidsai -c pytorch -c conda-forge -c nvidia -c bioc
     cuml \
     datasets \
     dimorphite-dl \
-    cuda-version=12.6 \
     'gromacs=*=nompi_cuda*' \
     nglview \
     mdanalysis \
@@ -71,6 +70,7 @@ RUN mamba create -n mldd -c rapidsai -c pytorch -c conda-forge -c nvidia -c bioc
     pytest \
     python-Levenshtein \
     pytorch \
+    pytorch-cuda \
     rdkit \
     safetensors \
     selfies \
