@@ -49,6 +49,7 @@ RUN mamba create -n mldd -c rapidsai -c pytorch -c conda-forge -c nvidia -c bioc
     ipykernel \
     accelerate \
     biopython \
+    blitz-bayesian-pytorch \
     bokeh \
     chembl_webresource_client \
     cudf-polars \
