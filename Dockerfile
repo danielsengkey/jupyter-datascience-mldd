@@ -63,6 +63,8 @@ RUN mamba create -n mldd -c rapidsai -c pytorch -c conda-forge -c nvidia -c bioc
     numpy \
     openbabel \
     openmm \
+    optuna \
+    optuna-dashboard \
     polars \
     padelpy \
     papermill \
